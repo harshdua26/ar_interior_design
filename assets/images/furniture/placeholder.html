@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placeholder Images</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="sofa" width="400" height="300"></canvas>
+    <canvas id="dining_table" width="400" height="300"></canvas>
+    <canvas id="bookshelf" width="400" height="300"></canvas>
+    <canvas id="coffee_table" width="400" height="300"></canvas>
+    <canvas id="bed" width="400" height="300"></canvas>
+    <canvas id="dresser" width="400" height="300"></canvas>
+    <script>
+        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD', '#D4A5A5'];
+        const canvasIds = ['sofa', 'dining_table', 'bookshelf', 'coffee_table', 'bed', 'dresser'];
+        
+        canvasIds.forEach((id, index) => {
+            const canvas = document.getElementById(id);
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = colors[index];
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add text
+            ctx.fillStyle = '#000000';
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(id.replace('_', ' ').toUpperCase(), canvas.width/2, canvas.height/2);
+            
+            // Save as JPG
+            const link = document.createElement('a');
+            link.download = id + '.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.8);
+            link.click();
+        });
+    </script>
+</body>
+</html> 
